@@ -43,7 +43,7 @@ class SMSFlyAPI
         if ($state->isOneOf(StateCode::ACCEPT)) {
             return $result;
         }
-        throw new StateIsNotOk($message,$state);
+        throw new StateIsNotOk($message,$state,$result->getStateDesc());
     }
 
     /**
