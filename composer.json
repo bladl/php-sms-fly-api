@@ -32,6 +32,8 @@
         "php": ">=7.4",
         "ext-curl": "*",
         "ext-json": "*",
-        "bladl/time": "dev-main"
+        "bladl/time": "dev-main",
+      "ext-libxml": "*",
+        "ext-simplexml": "*"
     }
 }
