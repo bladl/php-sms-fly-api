@@ -1,0 +1,37 @@
+{
+    "name": "bladl/sms-fly",
+    "description": "PHP implementation of api manipulation with SMS-fly",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vlad Liakhovskyi"
+        }
+    ],
+    "keywords": ["SMS Fly","SMS-fly API"],
+    "autoload": {
+        "psr-4": {
+            "BladL\\SMSFly\\": "BladLSMSFly"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm --show-info=true",
+        "php-cs": "vendor/bin/php-cs-fixer fix",
+        "test": [
+            "@psalm",
+            "@php-cs"
+        ]
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": ">=2.18",
+        "vimeo/psalm": ">=4.6"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "bladl/time": "dev-main"
+    }
+}
