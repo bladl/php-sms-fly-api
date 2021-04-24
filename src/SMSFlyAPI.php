@@ -45,6 +45,8 @@ class SMSFlyAPI
         }
         if ($state->isOneOf(StateCode::INSUFFICIENT_FUNDS)) {
             $this->logger->alert('Insufficient funds!');
+        } else {
+            $this->logger->error($state->toString().' '.$result->getStateDesc());
         }
         throw new StateIsNotOk($message,$state,$result->getStateDesc());
     }
