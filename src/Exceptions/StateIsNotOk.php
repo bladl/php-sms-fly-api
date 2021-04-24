@@ -21,6 +21,6 @@ final class StateIsNotOk extends Exception
 
     public function getSMSMessage(): Message
     {
-        return $this->message;
+        return $this->smsMsg;
     }
 }

@@ -14,7 +14,7 @@ class Message
     private int $ratePerMinute = 1;
     private int $hoursLifetime = 4;
 
-    public function __construct(string $source,string $recipient, string $text)
+    public function __construct(string $source, string $recipient, string $text)
     {
         $this->source = $source;
         $this->text = $text;
@@ -64,7 +64,7 @@ class Message
     public function getStartTimeStr(): string
     {
         $start_time = $this->startTime;
-        return $start_time ? 'AUTO' : SMSFlyAPI::getTimeZone()->unix($start_time)->format('Y-m-d h:i:s');
+        return $start_time ? SMSFlyAPI::getTimeZone()->unix($start_time)->format('Y-m-d h:i:s') : 'AUTO';
     }
 
     public function setEndTime(int $time): void
@@ -75,7 +75,7 @@ class Message
     public function getEndTimeStr(): string
     {
         $end_time = $this->endTime;
-        return $end_time ? 'AUTO' : SMSFlyAPI::getTimeZone()->unix($end_time)->format('Y-m-d h:i:s');
+        return $end_time ? SMSFlyAPI::getTimeZone()->unix($end_time)->format('Y-m-d h:i:s') : 'AUTO';
     }
 
     public function getHoursLifetime(): int

@@ -6,7 +6,6 @@ namespace BladL\SMSFly;
 
 
 use BladL\SMSFly\Data\MessagesResult;
-use BladL\SMSFly\Exceptions\BadXMLReturned;
 use BladL\SMSFly\Exceptions\CurlFailed;
 use BladL\SMSFly\Exceptions\ErrorReturned;
 use BladL\SMSFly\Exceptions\StateIsNotOk;
@@ -15,7 +14,6 @@ use BladL\Time\TimeZone;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SimpleXMLElement;
-use function is_string;
 
 class SMSFlyAPI
 {
@@ -37,7 +35,7 @@ class SMSFlyAPI
         $this->password = $password;
     }
     /**
-     * @throws CurlFailed|ErrorReturned|BadXMLReturned|StateIsNotOk
+     * @throws CurlFailed|ErrorReturned|StateIsNotOk
      */
     public function sendSms(Message $message):MessagesResult {
         $result  = new MessagesResult($this->sendPost('SENDSMS',$message->getXmlBody()));
@@ -48,7 +46,7 @@ class SMSFlyAPI
     }
 
     /**
-     * @throws CurlFailed|ErrorReturned|BadXMLReturned
+     * @throws CurlFailed|ErrorReturned
      */
     protected function sendPost(string $operation,string $body): SimpleXMLElement {
         $post_fields =
@@ -75,21 +73,13 @@ class SMSFlyAPI
         }
         $use_errors = libxml_use_internal_errors(true);
         $xml_resp = simplexml_load_string($response);
-        if (false === $xml_resp || null === $xml_resp) {
-            if (is_string($response)) {
-                $this->logger->error("Error '$response'");
-                throw new ErrorReturned($response);
-            }
-            $this->logger->critical("Bad xml '$response'");
-            throw new BadXMLReturned($response);
-        }
-
         libxml_clear_errors();
         libxml_use_internal_errors($use_errors);
-        if (is_string($xml_resp)) {
-            $this->logger->error("Error $xml_resp");
-            throw new ErrorReturned($xml_resp);
+        if ($xml_resp instanceof SimpleXMLElement) {
+            return $xml_resp;
         }
-        return $xml_resp;
+        $this->logger->error("Error '$response'");
+        throw new ErrorReturned($response);
+
     }
 }

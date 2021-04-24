@@ -7,6 +7,7 @@ namespace BladL\SMSFly\Data;
 use BladL\SMSFly\SMSFlyAPI;
 use BladL\SMSFly\Types\Campaign\StateCode;
 use BladL\Time\Moment;
+use Exception;
 
 final class MessagesResult extends Container
 {
@@ -22,14 +23,14 @@ final class MessagesResult extends Container
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDate():Moment{
         return new Moment(SMSFlyAPI::getTimeZone(),(string)$this->getData()->date);
     }
 
     /**
-     * @return \BladL\SMSFly\Data\MessageTo
+     * @return MessageTo
      */
     public function getTo(): MessageTo
     {
