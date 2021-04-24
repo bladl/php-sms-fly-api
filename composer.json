@@ -11,7 +11,7 @@
     "keywords": ["SMS Fly","SMS-fly API"],
     "autoload": {
         "psr-4": {
-            "BladL\\SMSFly\\": "BladLSMSFly"
+            "BladL\\SMSFly\\": "src"
         }
     },
     "scripts": {

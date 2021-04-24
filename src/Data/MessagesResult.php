@@ -7,7 +7,6 @@ namespace BladL\SMSFly\Data;
 use BladL\SMSFly\SMSFlyAPI;
 use BladL\SMSFly\Types\Campaign\StateCode;
 use BladL\Time\Moment;
-use SimpleXMLElement;
 
 final class MessagesResult extends Container
 {
