@@ -39,10 +39,11 @@ class SMSFlyAPI
      */
     public function sendSms(Message $message):MessagesResult {
         $result  = new MessagesResult($this->sendPost('SENDSMS',$message->getXmlBody()));
-        if ($result->getStateCode()->isOneOf(StateCode::ACCEPT)) {
+        $state = $result->getStateCode();
+        if ($state->isOneOf(StateCode::ACCEPT)) {
             return $result;
         }
-        throw new StateIsNotOk($message);
+        throw new StateIsNotOk($message,$state);
     }
 
     /**
